@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1> Registered Users</h1>
+  {% for user in users %}
+  <p> {{user}}</p>
+
+  {% enfor %}
+
+
+{% endblock content %}

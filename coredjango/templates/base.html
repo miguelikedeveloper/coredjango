@@ -3,9 +3,10 @@
 
     <head>
         {% if request.user.is_authenticated %}
+        <p> <a href="/> Home </a> | <a href="{% url 'logout' %}"></a></p>
         <p> Hello, {{request.user.username}}| <a href="{% url 'logout' %}"> Logout</a></p>
         {% else %}
-        <p> <a href="{% url 'register' %}"> Register</a> | <a href="#">Login</a></p>
+        <p> <a href="/"> Home</a> | <a href="{% url 'register' %}"> Register</a> | <a href="{% url 'login' %}">Login</a></p>
         {% endif %}
     </head>
         {% block content %}
