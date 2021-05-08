@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 
-from .forms import RegistratrionForm , UserAuthenticationForm
+from .forms import RegistrationForm , UserAuthenticationForm
 
 def registration_view(request):
     context = {}
@@ -11,21 +11,21 @@ def registration_view(request):
             form.save()
             email  = form.cleaned_data.get("form")
             raw_password  = form.cleaned_data.get("password1")
-            account = authenticate(email=email, password=password1)
+            account = authenticate(email=email, password=raw_password)
             login(request, account)
-            return redirect("admin")
+            return redirect("home")
 
         else:
             context["registration_form"] = form
 
     else:
-        form = RegistratrionForm()
+        form = RegistrationForm()
         context["registration_form"]  = form
     return render(request, "users/register.html", context)
 
 def logout_view(request):
-    logoupt(request)
-    return redirect("admin")
+    logout(request)
+    return redirect("home")
 
 def login_view(request):
     context = {}
@@ -47,3 +47,7 @@ def login_view(request):
     context["form"] = form
 
     return render(request, "users/login.html", context)
+
+
+def home_screen_view(request):
+    return render(request, "home.html", {})
